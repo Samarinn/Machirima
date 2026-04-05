@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Machirima</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FDF8F0;
+      color: #2E241F;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .logo, .nav-links a, .btn, .card-title, .special-title {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* custom cozy color palette */
+    :root {
+      --warm-bg: #FDF8F0;
+      --terracotta: #C05A2B;
+      --deep-wood: #5A3A2B;
+      --olive-green: #6F4E2E;
+      --cream: #FFF9EF;
+      --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 20px 25px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* header & navigation */
+    header {
+      background: rgba(253, 248, 240, 0.96);
+      backdrop-filter: blur(2px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.03);
+      border-bottom: 1px solid #F2E5D4;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      font-weight: 400;
+      color: var(--deep-wood);
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #3E2A24;
+      transition: color 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links li a:hover, .nav-links li a.active {
+      color: var(--terracotta);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--deep-wood);
+    }
+
+    /* hero section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('https://images.unsplash.com/photo-1590947132387-155cc02f3212?q=80&w=2070&auto=format');
+      background-size: cover;
+      background-position: center 35%;
+      height: 85vh;
+      min-height: 550px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero-content p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      font-weight: 400;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--terracotta);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      backdrop-filter: blur(2px);
+    }
+
+    .btn-outline:hover {
+      background: white;
+      color: var(--terracotta);
+      border-color: white;
+    }
+
+    .btn:hover {
+      background: #9E401C;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 20px -12px rgba(0,0,0,0.3);
+    }
+
+    /* section general */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--deep-wood);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #7F6858;
+      max-width: 680px;
+      margin: 0 auto 3rem auto;
+      font-size: 1.1rem;
+    }
+
+    /* about */
+    .about-grid {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-text h3 {
+      font-size: 1.8rem;
+      color: var(--terracotta);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1.2rem;
+      color: #4A372E;
+    }
+
+    .about-img {
+      flex: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+
+    .about-img:hover img {
+      transform: scale(1.02);
+    }
+
+    /* menu cards */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .menu-card {
+      background: var(--cream);
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #F3E7DB;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-img {
+      height: 210px;
+      overflow: hidden;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .menu-card:hover .card-img img {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.5rem;
+    }
+
+    .price {
+      color: var(--terracotta);
+      font-weight: 700;
+      font-size: 1.3rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .card-desc {
+      color: #6D5A4C;
+      margin: 0.7rem 0 1rem;
+      font-size: 0.95rem;
+    }
+
+    .order-btn {
+      background: none;
+      border: 1.5px solid var(--terracotta);
+      color: var(--terracotta);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.85rem;
+    }
+
+    .order-btn:hover {
+      background: var(--terracotta);
+      color: white;
+    }
+
+    /* specials banner */
+    .specials-banner {
+      background: #F7EDE2;
+      border-radius: 48px;
+      padding: 2rem 2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .specials-banner h3 {
+      font-size: 1.8rem;
+      color: var(--deep-wood);
+    }
+
+    .specials-banner p {
+      font-size: 1.1rem;
+    }
+
+    /* testimonials */
+    .testimonial-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 1.8rem;
+      border-radius: 32px;
+      flex: 1;
+      min-width: 260px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--terracotta);
+    }
+
+    .testimonial-card i {
+      color: var(--terracotta);
+      font-size: 2rem;
+      opacity: 0.6;
+      margin-bottom: 1rem;
+    }
+
+    /* contact & hours */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+    }
+
+    .contact-info, .hours-info {
+      flex: 1;
+      background: #FFFBF5;
+      padding: 2rem;
+      border-radius: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-info h3, .hours-info h3 {
+      font-size: 1.6rem;
+      color: var(--terracotta);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .contact-detail i {
+      width: 28px;
+      color: var(--terracotta);
+      font-size: 1.2rem;
+    }
+
+    .hours-list p {
+      margin-bottom: 0.7rem;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed #E5D5C4;
+      padding-bottom: 0.5rem;
+    }
+
+    .reserve-form input, .reserve-form textarea, .reserve-form select {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      border: 1px solid #EADBCE;
+      border-radius: 28px;
+      font-family: 'Inter', sans-serif;
+      background: white;
+    }
+
+    .reserve-form button {
+      width: 100%;
+      background: var(--terracotta);
+      border: none;
+      padding: 0.9rem;
+      border-radius: 40px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    /* footer */
+    footer {
+      background: #2E241F;
+      color: #EEDCCD;
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    .social-icons {
+      margin: 1rem 0;
+    }
+
+    .social-icons a {
+      color: #EEDCCD;
+      font-size: 1.4rem;
+      margin: 0 0.6rem;
+      transition: color 0.2s;
+    }
+
+    .social-icons a:hover {
+      color: var(--terracotta);
+    }
+
+    /* toast message */
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2E241F;
+      color: #FCE9D8;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+    }
+
+    /* responsive */
+    @media (max-width: 860px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        background: #FDF8F0;
+        padding: 1.5rem 0;
+        border-radius: 20px;
+        gap: 1rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        height: 70vh;
+      }
+      .btn-group {
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Toast container -->
+<div id="toast" class="toast-msg">✨ Item adicionado (demo)</div>
+
+<header>
+  <div class="container navbar">
+    <div class="logo">Machirima</div>
+    <div class="hamburger" id="hamburger">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#contact">Reserva</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Forno à Lenha • Família • Aconchego</h1>
+      <p>Pizzas napolitanas autênticas, preparadas com amor, ingredientes frescos e alma rústica. Venha pela fatia, fique pelo calor humano.</p>
+      <div class="btn-group">
+        <a href="#menu" class="btn">🍕 Ver menu</a>
+        <a href="#contact" class="btn btn-outline">📅 Reservar mesa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">A história</h2>
+      <div class="about-grid">
+        <div class="about-text">
+           <p>No coração da cidade, a Machirima traz a alma dos trabalhadores para sua mesa. Nossa massa é fermentada lentamente por 48 horas, coberta com tomates San Marzano e assada em forno a lenha exclusivo.</p>
+          <p>Acreditamos que pizza é mais que comida — é união, abraço e noites aconchegantes. Cada ingrediente é de origem local e cada pizza é feita com paciência e paixão.</p>
+          <p><i class="fas fa-fire" style="color: var(--accent);"></i> <strong> 100% forno à lenha • Receitas de família desde 2025</strong></p>
+        </div>
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&auto=format" alt="Chef making pizza in rustic kitchen" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+<section id="menu">
+    <div class="container">
+      <h2 class="section-title">Nossas Pizzas Especiais</h2>
+      <p class="section-sub">Clássicas e criativas, assadas na lenha na perfeição.</p>
+      <div class="menu-grid" id="menuGrid"></div>
+      <div class="specials-banner">
+        <h3><i class="fas fa-tag"></i> Promoção da Semana</h3>
+        <p>Compre qualquer Margherita ou Pepperoni e ganhe um tiramisu grátis! <strong>|</strong> Terça a Quinta-feira</p>
+        <p style="font-size:0.9rem; margin-top: 0.5rem;">✨ Happy Hour: 17h–19h • 20% de desconto em chopes e vinhos da casa</p>
+      </div>
+    </div>
+  </section>
+  <!-- Testimonials -->
+ <section style="background-color: var(--bg-secondary); transition: background 0.2s;">
+    <div class="container">
+      <h2 class="section-title">O que nossos clientes dizem</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"A pizza mais autêntica fora de Nápoles. Ambiente aconchegante e equipe incrível. Os arancini são divinos!"</p>
+          <h4 style="margin-top: 1rem;">— Sofia L.</h4>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"Finalmente uma pizzaria que parece um lar. A crosta no forno a lenha é leve e defumada, noite perfeita para um date. Voltamos sempre!"</p>
+          <h4 style="margin-top: 1rem;">— Marcos & Helena</h4>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"Melhor massa sem glúten que já comi. O pátio externo é charmoso com luzes — uma joia escondida."</p>
+          <h4 style="margin-top: 1rem;">— Raquel K.</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact + Reservation + Hours -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Visite & Reserve</h2>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3><i class="fas fa-store"></i> Onde estamos</h3>
+          <div class="contact-detail"><i class="fas fa-map-marker-alt"></i> Rua da Lenha, 48 - Bairro da Vila, São Paulo - SP, 01234-567</div>
+          <div class="contact-detail"><i class="fas fa-phone-alt"></i> (11) 3456-7890</div>
+          <div class="contact-detail"><i class="fas fa-envelope"></i> Machirima@gmail.com</div>
+          <div style="margin-top: 1.5rem;">
+            <iframe class="map-iframe" src="https://maps.google.com/maps?q=Vila+Madalena+S%C3%A3o+Paulo&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="hours-info">
+          <h3><i class="far fa-clock"></i> Horário de Funcionamento</h3>
+          <div class="hours-list">
+            <p><span>Segunda - Quinta</span> <span>11:30 – 22:00</span></p>
+            <p><span>Sexta - Sábado</span> <span>11:30 – 23:30</span></p>
+            <p><span>Domingo</span> <span>12:00 – 21:00</span></p>
+            <p><span>Happy Hour</span> <span>Seg-Sex 17h–19h</span></p>
+          </div>
+          <h3 style="margin-top: 2rem;"><i class="fas fa-chair"></i> Reserve uma mesa</h3>
+          <form id="reservationForm" class="reserve-form">
+            <input type="text" placeholder="Nome completo" id="resName" required>
+            <input type="email" placeholder="E-mail" id="resEmail" required>
+            <input type="tel" placeholder="Telefone" id="resPhone">
+            <select id="resGuests">
+              <option>1 pessoa</option><option>2 pessoas</option><option>3 pessoas</option><option>4 pessoas</option><option>5+ pessoas</option>
+            </select>
+            <input type="date" id="resDate">
+            <textarea rows="2" placeholder="Pedidos especiais (alergias, ocasião)"></textarea>
+            <button type="submit" id="submitReserve">Solicitar Reserva</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+    <p>© 2025 Machirima — Onde o aconchego encontra o sabor autêntico. Todos os direitos reservados.</p>
+    <p style="margin-top: 0.7rem; font-size: 0.8rem;"><i class="fas fa-pizza-slice"></i> feito com paixão no forno a lenha</p>
+  </div>
+</footer>
+
+<script>
+  // Menu Data (cozy, professional)
+  const menuItems = [
+    {
+      name: "Margherita D.O.C.",
+      price: "$16",
+      desc: "Tomates San Marzano, muçarela fresca, manjericão, azeite extravirgem.",
+      img: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=600&auto=format",
+      alt: "Classic Margherita pizza"
+    },
+    {
+      name: "Pepperoni Classico",
+      price: "$19",
+      desc: "Pepperoni picante, muçarela, molho de tomate, orégano, parmesão.",
+      img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&auto=format",
+      alt: "Pepperoni pizza"
+    },
+    {
+      name: "Funghi & Tartufo",
+      price: "$21",
+      desc: "Cogumelos variados, azeite trufado, ricota, muçarela, tomilho fresco.",
+      img: "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/ab/f2/99/napolitansk-pizza-funghi.jpg?w=600&auto=format",
+      alt: "Mushroom truffle pizza"
+    },
+    {
+      name: "Quattro Formaggi",
+      price: "$20",
+      desc: "Gorgonzola, parmesão, fontina, muçarela, fio de mel.",
+      img: "https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?w=600&auto=format",
+      alt: "Four cheese pizza"
+    }
+  ];
+
+  function buildMenu() {
+    const menuGrid = document.getElementById('menuGrid');
+    if (!menuGrid) return;
+    menuGrid.innerHTML = '';
+    menuItems.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'menu-card';
+      card.innerHTML = `
+        <div class="card-img">
+          <img src="${item.img}" alt="${item.alt}" loading="lazy">
+        </div>
+        <div class="card-content">
+          <div class="card-title">
+            <span>${item.name}</span>
+            <span class="price">${item.price}</span>
+          </div>
+          <p class="card-desc">${item.desc}</p>
+          <button class="order-btn" data-pizza="${item.name}"><i class="fas fa-shopping-cart"></i>Pedir Agora</button>
+        </div>
+      `;
+      menuGrid.appendChild(card);
+    });
+    // attach order events after creation
+    document.querySelectorAll('.order-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const pizzaName = btn.getAttribute('data-pizza') || 'this delicious pizza';
+        showToast(`🍕 ${pizzaName} Pedido Adicionado!(demo)`);
+      });
+    });
+  }
+
+  // Toast function
+  let toastTimeout;
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (toastTimeout) clearTimeout(toastTimeout);
+    toast.textContent = message || '✨ Pedido Adicionado (demo)';
+    toast.classList.add('show');
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2200);
+  }
+
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    // close when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  }
+
+  // Smooth scroll for anchor links (prevent default)
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const targetElem = document.querySelector(targetId);
+      if (targetElem) {
+        e.preventDefault();
+        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // update active class on nav manually (just visual)
+        document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+        if (this.classList.contains('btn') || this.closest('.nav-links')) {
+          this.classList.add('active');
+        }
+      }
+    });
+  });
+
+  // Reservation form handling
+  const reserveForm = document.getElementById('reservationForm');
+  if (reserveForm) {
+    reserveForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('resName')?.value.trim();
+      if (!name) {
+        showToast("Adicione seu nome para resevar");
+        return;
+      }
+      // simple demo success
+      showToast(`🍷 Obrigado ${name}! Sua mesa foi reservada, nós de ligaremos mais tarde.`);
+      reserveForm.reset();
+    });
+  }
+
+  // extra effect: active nav highlighting on scroll
+  const sections = document.querySelectorAll('section[id]');
+  function highlightNav() {
+    const scrollPos = window.scrollY + 120;
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionBottom = sectionTop + section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      const navLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+      if (scrollPos >= sectionTop && scrollPos < sectionBottom) {
+        document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+        if (navLink) navLink.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('scroll', highlightNav);
+  window.addEventListener('load', () => {
+    buildMenu();
+    highlightNav();
+    // set default date for reservation to today
+    const dateInput = document.getElementById('resDate');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.value = today;
+    }
+  });
+  // Add some cozy hover animations
+  const styleAdd = document.createElement('style');
+  styleAdd.textContent = ` .menu-card { transition: transform 0.25s ease, box-shadow 0.3s; } `;
+  document.head.appendChild(styleAdd);
+</script>
+</body>
+</html>
